@@ -156,12 +156,101 @@ export const PRICING = [
   },
 ];
 
-export const TESTIMONIALS = [
-  { name: 'Ananya Mehta', role: 'Bride, Mumbai', quote: 'My bridal lehenga felt like a second skin. The Kaariq team understood my brief in a single sitting and delivered the most exquisite hand-zardozi I have seen.' },
-  { name: 'Rohan Khanna', role: 'Groom, Delhi', quote: 'A sherwani that fit perfectly on day one — without a single follow-up alteration. Effortless, world-class craftsmanship.' },
-  { name: 'Priya Iyer', role: 'Bengaluru', quote: 'I sent my measurements on a Sunday and a kurta set arrived in 12 days. Beautifully finished, packaging like a luxury brand.' },
-  { name: 'Arjun Nair', role: 'Singapore', quote: 'Their virtual fitting actually works. Three suits later, I am a customer for life.' },
+export const HERO_SLIDES = [
+  {
+    id: 'kurtis',
+    eyebrow: 'NEW IN \u00b7 SS \u201926',
+    title: 'Kurtis,\ncrafted to flow.',
+    body: 'Hand-blocked, breath-light cottons and silks \u2014 made to your measure.',
+    cta: { label: 'Shop Kurtis', to: '/tailoring/kurta' },
+    image: 'https://images.unsplash.com/photo-1708534246055-d7b149acb731',
+    align: 'left',
+    overlay: 'linear-gradient(90deg, rgba(50,56,43,0.72) 0%, rgba(50,56,43,0.28) 45%, rgba(50,56,43,0) 70%)',
+  },
+  {
+    id: 'salwar',
+    eyebrow: 'CO\u2011ORD EDIT',
+    title: 'Salwars &\nco\u2011ord sets.',
+    body: 'Tailored separates that move with you, from morning to mehendi.',
+    cta: { label: 'Explore the Edit', to: '/tailoring/bottoms-and-salwars' },
+    image: 'https://images.unsplash.com/photo-1583391734039-1c611b6d9bd0',
+    align: 'right',
+    overlay: 'linear-gradient(270deg, rgba(50,56,43,0.7) 0%, rgba(50,56,43,0.25) 45%, rgba(50,56,43,0) 70%)',
+  },
+  {
+    id: 'mens',
+    eyebrow: 'BESPOKE \u00b7 MEN',
+    title: 'Suits & sherwanis,\nbuilt to fit.',
+    body: 'Hand-cut canvas, mother-of-pearl buttons, and silhouettes that last decades.',
+    cta: { label: "Shop Men's", to: '/tailoring/suits-and-blazers' },
+    image: 'https://images.unsplash.com/photo-1729347917808-e3e35a462fec',
+    align: 'left',
+    overlay: 'linear-gradient(90deg, rgba(50,56,43,0.78) 0%, rgba(50,56,43,0.35) 50%, rgba(50,56,43,0) 78%)',
+  },
+  {
+    id: 'alterations',
+    eyebrow: 'COMPLIMENTARY SERVICE',
+    title: 'Free alterations,\nfor life.',
+    body: 'Every bespoke order from Kaariq is altered free \u2014 forever. Bring it back, we\u2019ll bring it home.',
+    cta: { label: 'Learn more', to: '/tailoring/alterations-and-repairs' },
+    image: 'https://images.unsplash.com/photo-1708234165852-89c978e5e33d',
+    align: 'left',
+    overlay: 'linear-gradient(90deg, rgba(50,56,43,0.82) 0%, rgba(50,56,43,0.45) 55%, rgba(114,121,65,0.15) 100%)',
+  },
+  {
+    id: 'pickup',
+    eyebrow: 'NOW IN 25+ CITIES',
+    title: 'Free pickup,\nfree delivery.',
+    body: 'Doorstep measurement, garment pickup, and white-glove delivery \u2014 included with every order.',
+    cta: { label: 'Book a pickup', to: '/booking/book-appointment' },
+    image: 'https://images.unsplash.com/photo-1759563874665-af0168ce2011',
+    align: 'right',
+    overlay: 'linear-gradient(270deg, rgba(50,56,43,0.78) 0%, rgba(50,56,43,0.35) 55%, rgba(50,56,43,0) 80%)',
+  },
+  {
+    id: 'studio',
+    eyebrow: 'INSIDE THE ATELIER',
+    title: 'A studio,\nbuilt by hand.',
+    body: 'Fabrics, threads, and master tailors \u2014 visit our Bandra atelier or step in virtually.',
+    cta: { label: 'Visit the studio', to: '/contact/find-our-studio' },
+    image: 'https://images.unsplash.com/photo-1771074152971-7dba5f49bf93',
+    align: 'left',
+    overlay: 'linear-gradient(90deg, rgba(50,56,43,0.7) 0%, rgba(50,56,43,0.2) 50%, rgba(0,0,0,0) 80%)',
+  },
 ];
+
+export const TESTIMONIAL_MEDIA = [
+  {
+    name: 'Ananya Mehta', role: 'Bride, Mumbai',
+    quote: 'My bridal lehenga felt like a second skin. The Kaariq team understood my brief in a single sitting and delivered the most exquisite hand-zardozi I have seen.',
+    type: 'image',
+    thumb: 'https://images.unsplash.com/photo-1724856604403-60304b28906c',
+    src: 'https://images.unsplash.com/photo-1724856604403-60304b28906c',
+  },
+  {
+    name: 'Rohan Khanna', role: 'Groom, Delhi',
+    quote: 'A sherwani that fit perfectly on day one \u2014 without a single follow-up alteration. Effortless, world-class craftsmanship.',
+    type: 'video',
+    thumb: 'https://images.pexels.com/photos/6687162/pexels-photo-6687162.jpeg',
+    src: 'https://www.youtube.com/embed/2Vv-BfVoq4g?autoplay=1',
+  },
+  {
+    name: 'Priya Iyer', role: 'Bengaluru',
+    quote: 'I sent my measurements on a Sunday and a kurta set arrived in 12 days. Beautifully finished, packaging like a luxury brand.',
+    type: 'image',
+    thumb: 'https://images.unsplash.com/photo-1768651925875-d1523ed07cb6',
+    src: 'https://images.unsplash.com/photo-1768651925875-d1523ed07cb6',
+  },
+  {
+    name: 'Arjun Nair', role: 'Singapore',
+    quote: 'Their virtual fitting actually works. Three suits later, I am a customer for life.',
+    type: 'video',
+    thumb: 'https://images.unsplash.com/photo-1729347917808-e3e35a462fec',
+    src: 'https://www.youtube.com/embed/ScMzIvxBSi4?autoplay=1',
+  },
+];
+
+export const TESTIMONIALS = TESTIMONIAL_MEDIA;
 
 export const BLOG = [
   { title: 'A guide to choosing the right blouse neckline', date: 'Apr 18, 2026', tag: 'Style', img: IMAGES.women },
