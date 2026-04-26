@@ -32,7 +32,7 @@ export default function Explore() {
           ['personal-style-quiz','Style Quiz'],
           ['customer-showreels','Showreels'],
         ].map(([s,l]) => (
-          <Link key={s} to={`/explore/${s}`} className={`text-[11px] tracking-[0.22em] uppercase px-4 py-2 border transition-colors ${view===s ? 'bg-[hsl(160,30%,12%)] text-[hsl(36,33%,96%)] border-[hsl(160,30%,12%)]' : 'border-[hsl(36,14%,82%)] hover:border-[hsl(160,30%,12%)]'}`}>{l}</Link>
+          <Link key={s} to={`/explore/${s}`} className={`text-[11px] tracking-[0.22em] uppercase px-4 py-2 border transition-colors ${view===s ? 'bg-[hsl(351,33%,18%)] text-[hsl(30,22%,95%)] border-[hsl(351,33%,18%)]' : 'border-[hsl(28,11%,70%)] hover:border-[hsl(351,33%,18%)]'}`}>{l}</Link>
         ))}
       </div>
 
@@ -40,7 +40,7 @@ export default function Explore() {
         {view === 'gallery-and-lookbook' && (
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5">
             {GALLERY.map((g, i) => (
-              <div key={i} className={`overflow-hidden bg-[hsl(36,18%,88%)] ${i%5===0 ? 'aspect-[3/4] lg:row-span-2 lg:aspect-[3/5]' : 'aspect-[3/4]'}`}>
+              <div key={i} className={`overflow-hidden bg-[hsl(30,14%,82%)] ${i%5===0 ? 'aspect-[3/4] lg:row-span-2 lg:aspect-[3/5]' : 'aspect-[3/4]'}`}>
                 <img src={g} alt="" className="w-full h-full object-cover hover:scale-[1.05] transition-transform duration-700"/>
               </div>
             ))}
@@ -50,10 +50,10 @@ export default function Explore() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {[...BLOG, ...BLOG].map((b, i) => (
               <article key={i} className="group cursor-pointer">
-                <div className="aspect-[4/5] overflow-hidden bg-[hsl(36,18%,88%)] mb-4">
+                <div className="aspect-[4/5] overflow-hidden bg-[hsl(30,14%,82%)] mb-4">
                   <img src={b.img} alt="" className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700"/>
                 </div>
-                <div className="text-[11px] tracking-[0.22em] uppercase text-[hsl(160,12%,32%)]">{b.tag} · {b.date}</div>
+                <div className="text-[11px] tracking-[0.22em] uppercase text-[hsl(351,20%,28%)]">{b.tag} · {b.date}</div>
                 <h3 className="font-serif-display text-2xl mt-2">{b.title}</h3>
                 <span className="link-underline text-[12px] tracking-[0.22em] uppercase mt-3 inline-block">Read article →</span>
               </article>
@@ -68,13 +68,13 @@ export default function Explore() {
               <div key={s.name} className="group relative aspect-[3/5] overflow-hidden bg-black">
                 <img src={s.vid} alt="" className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-[1.04] transition-all duration-700"/>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"/>
-                <div className="absolute left-4 bottom-4 right-4 text-[hsl(36,33%,96%)]">
+                <div className="absolute left-4 bottom-4 right-4 text-[hsl(30,22%,95%)]">
                   <div className="edit-num opacity-90">SHOWREEL</div>
                   <div className="font-serif-display text-2xl mt-1">{s.name}</div>
                   <div className="text-[11px] tracking-[0.22em] uppercase opacity-80">{s.city}</div>
                 </div>
-                <button className="absolute inset-0 m-auto w-14 h-14 rounded-full bg-[hsl(36,33%,96%)]/90 flex items-center justify-center hover:bg-[hsl(36,33%,96%)] transition-colors" aria-label="Play">
-                  <ChevronRight className="w-6 h-6 text-[hsl(160,30%,12%)] ml-1"/>
+                <button className="absolute inset-0 m-auto w-14 h-14 rounded-full bg-[hsl(30,22%,95%)]/90 flex items-center justify-center hover:bg-[hsl(30,22%,95%)] transition-colors" aria-label="Play">
+                  <ChevronRight className="w-6 h-6 text-[hsl(351,33%,18%)] ml-1"/>
                 </button>
               </div>
             ))}
@@ -90,16 +90,16 @@ function AITool() {
   const [result, setResult] = useState(null);
   return (
     <div className="grid lg:grid-cols-2 gap-8">
-      <div className="bg-[hsl(36,33%,98%)] border border-[hsl(36,14%,82%)] p-8 lg:p-10">
-        <div className="flex items-center gap-2 text-[hsl(158,28%,22%)]"><Wand2 className="w-5 h-5"/><span className="edit-num">KAARIQ DESIGN STUDIO</span></div>
+      <div className="bg-[hsl(30,18%,92%)] border border-[hsl(28,11%,70%)] p-8 lg:p-10">
+        <div className="flex items-center gap-2 text-[hsl(351,33%,30%)]"><Wand2 className="w-5 h-5"/><span className="edit-num">KAARIQ DESIGN STUDIO</span></div>
         <h3 className="font-serif-display text-3xl mt-3">Describe your dream outfit.</h3>
-        <p className="text-sm text-[hsl(160,12%,32%)] mt-2">Our AI will sketch a moodboard and recommend fabrics, embroideries, and an estimated price.</p>
-        <textarea value={prompt} onChange={(e)=>setPrompt(e.target.value)} className="w-full mt-5 bg-white border border-[hsl(36,14%,82%)] p-4 text-sm focus:outline-none focus:border-[hsl(160,30%,12%)] min-h-[120px]"/>
-        <button onClick={()=>setResult({ id: Date.now() })} className="mt-4 inline-flex items-center gap-2 bg-[hsl(160,30%,12%)] text-[hsl(36,33%,96%)] px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-[hsl(158,28%,22%)] transition-colors"><Sparkles className="w-4 h-4"/>Generate moodboard</button>
-        <p className="text-[11px] mt-3 text-[hsl(160,12%,32%)]">*Demo only — connect API to enable live AI design.</p>
+        <p className="text-sm text-[hsl(351,20%,28%)] mt-2">Our AI will sketch a moodboard and recommend fabrics, embroideries, and an estimated price.</p>
+        <textarea value={prompt} onChange={(e)=>setPrompt(e.target.value)} className="w-full mt-5 bg-white border border-[hsl(28,11%,70%)] p-4 text-sm focus:outline-none focus:border-[hsl(351,33%,18%)] min-h-[120px]"/>
+        <button onClick={()=>setResult({ id: Date.now() })} className="mt-4 inline-flex items-center gap-2 bg-[hsl(351,33%,18%)] text-[hsl(30,22%,95%)] px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-[hsl(351,33%,30%)] transition-colors"><Sparkles className="w-4 h-4"/>Generate moodboard</button>
+        <p className="text-[11px] mt-3 text-[hsl(351,20%,28%)]">*Demo only — connect API to enable live AI design.</p>
       </div>
-      <div className="bg-[hsl(36,33%,98%)] border border-[hsl(36,14%,82%)] p-6 lg:p-8">
-        {!result && <div className="h-full flex items-center justify-center text-center min-h-[280px]"><div><Sparkles className="w-7 h-7 mx-auto text-[hsl(38,38%,58%)]"/><div className="text-sm text-[hsl(160,12%,32%)] mt-3">Your moodboard will appear here.</div></div></div>}
+      <div className="bg-[hsl(30,18%,92%)] border border-[hsl(28,11%,70%)] p-6 lg:p-8">
+        {!result && <div className="h-full flex items-center justify-center text-center min-h-[280px]"><div><Sparkles className="w-7 h-7 mx-auto text-[hsl(28,11%,55%)]"/><div className="text-sm text-[hsl(351,20%,28%)] mt-3">Your moodboard will appear here.</div></div></div>}
         {result && (
           <div>
             <div className="grid grid-cols-2 gap-2">
@@ -110,7 +110,7 @@ function AITool() {
             </div>
             <div className="mt-5">
               <div className="font-serif-display text-2xl">Suggested look</div>
-              <p className="text-sm text-[hsl(160,12%,32%)] mt-1">Pastel pista anarkali · organza dupatta · floral resham work · estimate ₹16,500 – ₹22,000.</p>
+              <p className="text-sm text-[hsl(351,20%,28%)] mt-1">Pastel pista anarkali · organza dupatta · floral resham work · estimate ₹16,500 – ₹22,000.</p>
               <Link to="/booking/book-appointment" className="link-underline text-[12px] tracking-[0.22em] uppercase mt-4 inline-block">Book a fitting →</Link>
             </div>
           </div>
@@ -125,25 +125,25 @@ function Quiz({ qs }) {
   const [ans, setAns] = useState([]);
   const done = step >= qs.length;
   return (
-    <div className="max-w-2xl mx-auto bg-[hsl(36,33%,98%)] border border-[hsl(36,14%,82%)] p-8 lg:p-12">
+    <div className="max-w-2xl mx-auto bg-[hsl(30,18%,92%)] border border-[hsl(28,11%,70%)] p-8 lg:p-12">
       {!done && (
         <>
-          <div className="edit-num text-[hsl(160,12%,32%)]">QUESTION 0{step+1} / 0{qs.length}</div>
+          <div className="edit-num text-[hsl(351,20%,28%)]">QUESTION 0{step+1} / 0{qs.length}</div>
           <h3 className="font-serif-display text-3xl mt-2">{qs[step].q}</h3>
           <div className="mt-6 space-y-2">
             {qs[step].a.map(opt => (
-              <button key={opt} onClick={()=>{ setAns([...ans, opt]); setStep(step+1); }} className="w-full text-left p-4 border border-[hsl(36,14%,82%)] hover:border-[hsl(160,30%,12%)] hover:bg-[hsl(36,33%,96%)] transition-colors text-sm">{opt}</button>
+              <button key={opt} onClick={()=>{ setAns([...ans, opt]); setStep(step+1); }} className="w-full text-left p-4 border border-[hsl(28,11%,70%)] hover:border-[hsl(351,33%,18%)] hover:bg-[hsl(30,22%,95%)] transition-colors text-sm">{opt}</button>
             ))}
           </div>
         </>
       )}
       {done && (
         <div className="text-center">
-          <Sparkles className="w-7 h-7 mx-auto text-[hsl(38,38%,58%)]"/>
-          <div className="edit-num text-[hsl(160,12%,32%)] mt-3">YOUR STYLE</div>
+          <Sparkles className="w-7 h-7 mx-auto text-[hsl(28,11%,55%)]"/>
+          <div className="edit-num text-[hsl(351,20%,28%)] mt-3">YOUR STYLE</div>
           <h3 className="font-serif-display text-4xl mt-2">Modern Heritage</h3>
-          <p className="text-sm text-[hsl(160,12%,32%)] mt-3">Refined classics with a contemporary edge — crisp tailoring, hand-finished details, and a calm palette.</p>
-          <Link to="/collections/modern-minimalist" className="inline-flex items-center gap-2 mt-6 bg-[hsl(160,30%,12%)] text-[hsl(36,33%,96%)] px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-[hsl(158,28%,22%)] transition-colors">See your edit <ArrowRight className="w-4 h-4"/></Link>
+          <p className="text-sm text-[hsl(351,20%,28%)] mt-3">Refined classics with a contemporary edge — crisp tailoring, hand-finished details, and a calm palette.</p>
+          <Link to="/collections/modern-minimalist" className="inline-flex items-center gap-2 mt-6 bg-[hsl(351,33%,18%)] text-[hsl(30,22%,95%)] px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-[hsl(351,33%,30%)] transition-colors">See your edit <ArrowRight className="w-4 h-4"/></Link>
         </div>
       )}
     </div>

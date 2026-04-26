@@ -18,7 +18,7 @@ export default function Contact() {
           ['whatsapp-support','WhatsApp Support'],
           ['corporate-inquiries','Corporate Inquiries'],
         ].map(([s,l]) => (
-          <Link key={s} to={`/contact/${s}`} className={`text-[11px] tracking-[0.22em] uppercase px-4 py-2 border transition-colors ${view===s ? 'bg-[hsl(160,30%,12%)] text-[hsl(36,33%,96%)] border-[hsl(160,30%,12%)]' : 'border-[hsl(36,14%,82%)] hover:border-[hsl(160,30%,12%)]'}`}>{l}</Link>
+          <Link key={s} to={`/contact/${s}`} className={`text-[11px] tracking-[0.22em] uppercase px-4 py-2 border transition-colors ${view===s ? 'bg-[hsl(351,33%,18%)] text-[hsl(30,22%,95%)] border-[hsl(351,33%,18%)]' : 'border-[hsl(28,11%,70%)] hover:border-[hsl(351,33%,18%)]'}`}>{l}</Link>
         ))}
       </div>
 
@@ -37,7 +37,7 @@ function Studio() {
   return (
     <div className="grid lg:grid-cols-12 gap-10">
       <div className="lg:col-span-5">
-        <div className="aspect-[4/3] overflow-hidden bg-[hsl(36,18%,88%)]">
+        <div className="aspect-[4/3] overflow-hidden bg-[hsl(30,14%,82%)]">
           <img src={IMAGES.boutique} alt="Atelier" className="w-full h-full object-cover"/>
         </div>
         <div className="grid sm:grid-cols-2 gap-4 mt-6">
@@ -48,26 +48,26 @@ function Studio() {
         </div>
       </div>
       <div className="lg:col-span-7">
-        <h2 className="font-serif-display text-3xl lg:text-4xl text-[hsl(160,30%,12%)]">Send us a note.</h2>
-        <p className="text-sm text-[hsl(160,12%,32%)] mt-3 max-w-xl">We answer every message personally. Expect a reply from a real human, not a bot.</p>
+        <h2 className="font-serif-display text-3xl lg:text-4xl text-[hsl(351,33%,18%)]">Send us a note.</h2>
+        <p className="text-sm text-[hsl(351,20%,28%)] mt-3 max-w-xl">We answer every message personally. Expect a reply from a real human, not a bot.</p>
         {!done ? (
           <form onSubmit={(e)=>{e.preventDefault(); setDone(true);}} className="mt-8 grid sm:grid-cols-2 gap-5">
             <Field label="Name" value={form.name} onChange={(e)=>setForm({...form,name:e.target.value})} required/>
             <Field label="Email" type="email" value={form.email} onChange={(e)=>setForm({...form,email:e.target.value})} required/>
             <div className="sm:col-span-2">
-              <label className="text-[11px] tracking-[0.22em] uppercase text-[hsl(160,12%,32%)]">Message</label>
-              <textarea rows="5" required value={form.message} onChange={(e)=>setForm({...form,message:e.target.value})} className="w-full mt-2 bg-white border border-[hsl(36,14%,82%)] p-3 text-sm focus:outline-none focus:border-[hsl(160,30%,12%)]"/>
+              <label className="text-[11px] tracking-[0.22em] uppercase text-[hsl(351,20%,28%)]">Message</label>
+              <textarea rows="5" required value={form.message} onChange={(e)=>setForm({...form,message:e.target.value})} className="w-full mt-2 bg-white border border-[hsl(28,11%,70%)] p-3 text-sm focus:outline-none focus:border-[hsl(351,33%,18%)]"/>
             </div>
-            <button type="submit" className="sm:col-span-2 inline-flex items-center gap-2 bg-[hsl(160,30%,12%)] text-[hsl(36,33%,96%)] px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-[hsl(158,28%,22%)] transition-colors w-fit"><Send className="w-4 h-4"/>Send message</button>
+            <button type="submit" className="sm:col-span-2 inline-flex items-center gap-2 bg-[hsl(351,33%,18%)] text-[hsl(30,22%,95%)] px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-[hsl(351,33%,30%)] transition-colors w-fit"><Send className="w-4 h-4"/>Send message</button>
           </form>
         ) : (
-          <div className="mt-8 p-8 bg-[hsl(36,33%,98%)] border border-[hsl(36,14%,82%)]">
-            <Check className="w-7 h-7 text-[hsl(158,28%,22%)]"/>
+          <div className="mt-8 p-8 bg-[hsl(30,18%,92%)] border border-[hsl(28,11%,70%)]">
+            <Check className="w-7 h-7 text-[hsl(351,33%,30%)]"/>
             <div className="font-serif-display text-2xl mt-3">Message received</div>
-            <p className="text-sm text-[hsl(160,12%,32%)] mt-1">We'll be in touch within an hour during studio hours.</p>
+            <p className="text-sm text-[hsl(351,20%,28%)] mt-1">We'll be in touch within an hour during studio hours.</p>
           </div>
         )}
-        <div className="mt-10 aspect-[16/9] overflow-hidden bg-[hsl(36,18%,88%)] border border-[hsl(36,14%,82%)]">
+        <div className="mt-10 aspect-[16/9] overflow-hidden bg-[hsl(30,14%,82%)] border border-[hsl(28,11%,70%)]">
           <iframe title="map" className="w-full h-full" src="https://www.openstreetmap.org/export/embed.html?bbox=72.81%2C19.05%2C72.85%2C19.07&layer=mapnik" loading="lazy"/>
         </div>
       </div>
@@ -77,11 +77,11 @@ function Studio() {
 
 function Whatsapp() {
   return (
-    <div className="max-w-3xl mx-auto bg-[hsl(160,30%,12%)] text-[hsl(36,33%,96%)] p-10 lg:p-14 text-center">
-      <MessageCircle className="w-9 h-9 mx-auto text-[hsl(38,38%,58%)]"/>
+    <div className="max-w-3xl mx-auto bg-[hsl(351,33%,18%)] text-[hsl(30,22%,95%)] p-10 lg:p-14 text-center">
+      <MessageCircle className="w-9 h-9 mx-auto text-[hsl(28,11%,55%)]"/>
       <h2 className="font-serif-display text-4xl lg:text-5xl mt-4">Chat on WhatsApp.</h2>
       <p className="text-sm opacity-80 mt-3 max-w-xl mx-auto">Send us inspiration images, ask about pricing, or share your timeline. Our concierge replies within minutes during studio hours.</p>
-      <a href={`https://wa.me/${SITE.whatsapp.replace(/\D/g,'')}`} className="inline-flex items-center gap-2 mt-8 bg-[hsl(36,33%,96%)] text-[hsl(160,30%,12%)] px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-[hsl(38,38%,58%)] transition-colors"><MessageCircle className="w-4 h-4"/>Open WhatsApp →</a>
+      <a href={`https://wa.me/${SITE.whatsapp.replace(/\D/g,'')}`} className="inline-flex items-center gap-2 mt-8 bg-[hsl(30,22%,95%)] text-[hsl(351,33%,18%)] px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-[hsl(28,11%,55%)] transition-colors"><MessageCircle className="w-4 h-4"/>Open WhatsApp →</a>
       <div className="text-[11px] tracking-[0.22em] uppercase opacity-70 mt-5">{SITE.whatsapp}</div>
     </div>
   );
@@ -93,34 +93,34 @@ function Corporate() {
   return (
     <div className="grid lg:grid-cols-12 gap-10">
       <div className="lg:col-span-5">
-        <Building2 className="w-7 h-7 text-[hsl(158,28%,22%)]"/>
-        <h2 className="font-serif-display text-3xl lg:text-4xl mt-3 text-[hsl(160,30%,12%)]">Corporate, weddings & wholesale.</h2>
-        <p className="text-sm text-[hsl(160,12%,32%)] mt-3">From wedding-party uniforms to brand collaborations, our team can scale production while keeping the hand-finished feel.</p>
+        <Building2 className="w-7 h-7 text-[hsl(351,33%,30%)]"/>
+        <h2 className="font-serif-display text-3xl lg:text-4xl mt-3 text-[hsl(351,33%,18%)]">Corporate, weddings & wholesale.</h2>
+        <p className="text-sm text-[hsl(351,20%,28%)] mt-3">From wedding-party uniforms to brand collaborations, our team can scale production while keeping the hand-finished feel.</p>
         <ul className="mt-6 space-y-2 text-sm">
-          {['Dedicated project manager','Up to 18% wholesale discount','Bulk shipping & invoicing','Brand-customised labels'].map(x => <li key={x} className="flex items-center gap-2"><Check className="w-4 h-4 text-[hsl(158,28%,22%)]"/>{x}</li>)}
+          {['Dedicated project manager','Up to 18% wholesale discount','Bulk shipping & invoicing','Brand-customised labels'].map(x => <li key={x} className="flex items-center gap-2"><Check className="w-4 h-4 text-[hsl(351,33%,30%)]"/>{x}</li>)}
         </ul>
       </div>
       <div className="lg:col-span-7">
         {!done ? (
-          <form onSubmit={(e)=>{e.preventDefault(); setDone(true);}} className="grid sm:grid-cols-2 gap-5 bg-[hsl(36,33%,98%)] border border-[hsl(36,14%,82%)] p-6 lg:p-8">
+          <form onSubmit={(e)=>{e.preventDefault(); setDone(true);}} className="grid sm:grid-cols-2 gap-5 bg-[hsl(30,18%,92%)] border border-[hsl(28,11%,70%)] p-6 lg:p-8">
             <Field label="Company" value={form.company} onChange={(e)=>setForm({...form,company:e.target.value})} required cls="sm:col-span-2"/>
             <Field label="Contact name" value={form.name} onChange={(e)=>setForm({...form,name:e.target.value})} required/>
             <Field label="Email" type="email" value={form.email} onChange={(e)=>setForm({...form,email:e.target.value})} required/>
             <div className="sm:col-span-2">
-              <label className="text-[11px] tracking-[0.22em] uppercase text-[hsl(160,12%,32%)]">Order size</label>
-              <select value={form.size} onChange={(e)=>setForm({...form,size:e.target.value})} className="w-full mt-2 bg-white border border-[hsl(36,14%,82%)] p-3 text-sm">
+              <label className="text-[11px] tracking-[0.22em] uppercase text-[hsl(351,20%,28%)]">Order size</label>
+              <select value={form.size} onChange={(e)=>setForm({...form,size:e.target.value})} className="w-full mt-2 bg-white border border-[hsl(28,11%,70%)] p-3 text-sm">
                 <option>10–25</option><option>26–50</option><option>51–100</option><option>100+</option>
               </select>
             </div>
             <div className="sm:col-span-2">
-              <label className="text-[11px] tracking-[0.22em] uppercase text-[hsl(160,12%,32%)]">Requirement</label>
-              <textarea rows="5" value={form.requirement} onChange={(e)=>setForm({...form,requirement:e.target.value})} className="w-full mt-2 bg-white border border-[hsl(36,14%,82%)] p-3 text-sm focus:outline-none focus:border-[hsl(160,30%,12%)]"/>
+              <label className="text-[11px] tracking-[0.22em] uppercase text-[hsl(351,20%,28%)]">Requirement</label>
+              <textarea rows="5" value={form.requirement} onChange={(e)=>setForm({...form,requirement:e.target.value})} className="w-full mt-2 bg-white border border-[hsl(28,11%,70%)] p-3 text-sm focus:outline-none focus:border-[hsl(351,33%,18%)]"/>
             </div>
-            <button type="submit" className="sm:col-span-2 inline-flex items-center gap-2 bg-[hsl(160,30%,12%)] text-[hsl(36,33%,96%)] px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-[hsl(158,28%,22%)] transition-colors w-fit"><Send className="w-4 h-4"/>Submit inquiry</button>
+            <button type="submit" className="sm:col-span-2 inline-flex items-center gap-2 bg-[hsl(351,33%,18%)] text-[hsl(30,22%,95%)] px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-[hsl(351,33%,30%)] transition-colors w-fit"><Send className="w-4 h-4"/>Submit inquiry</button>
           </form>
         ) : (
-          <div className="p-10 bg-[hsl(160,30%,12%)] text-[hsl(36,33%,96%)] text-center">
-            <Check className="w-8 h-8 mx-auto text-[hsl(38,38%,58%)]"/>
+          <div className="p-10 bg-[hsl(351,33%,18%)] text-[hsl(30,22%,95%)] text-center">
+            <Check className="w-8 h-8 mx-auto text-[hsl(28,11%,55%)]"/>
             <div className="font-serif-display text-3xl mt-3">Inquiry received</div>
             <p className="text-sm opacity-80 mt-2">Our team will reach out within one business day with a tailored proposal.</p>
           </div>
@@ -133,17 +133,17 @@ function Corporate() {
 function Field({ label, cls='', ...props }) {
   return (
     <div className={cls}>
-      <label className="text-[11px] tracking-[0.22em] uppercase text-[hsl(160,12%,32%)]">{label}</label>
-      <input {...props} className="w-full mt-2 bg-white border border-[hsl(36,14%,82%)] p-3 text-sm focus:outline-none focus:border-[hsl(160,30%,12%)]"/>
+      <label className="text-[11px] tracking-[0.22em] uppercase text-[hsl(351,20%,28%)]">{label}</label>
+      <input {...props} className="w-full mt-2 bg-white border border-[hsl(28,11%,70%)] p-3 text-sm focus:outline-none focus:border-[hsl(351,33%,18%)]"/>
     </div>
   );
 }
 function Info({ icon: Icon, title, body }) {
   return (
-    <div className="p-5 bg-[hsl(36,33%,98%)] border border-[hsl(36,14%,82%)]">
-      <Icon className="w-5 h-5 text-[hsl(158,28%,22%)]"/>
+    <div className="p-5 bg-[hsl(30,18%,92%)] border border-[hsl(28,11%,70%)]">
+      <Icon className="w-5 h-5 text-[hsl(351,33%,30%)]"/>
       <div className="font-serif-display text-lg mt-2">{title}</div>
-      <div className="text-sm text-[hsl(160,12%,32%)] mt-1">{body}</div>
+      <div className="text-sm text-[hsl(351,20%,28%)] mt-1">{body}</div>
     </div>
   );
 }

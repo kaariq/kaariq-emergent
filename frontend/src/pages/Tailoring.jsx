@@ -38,7 +38,7 @@ export default function Tailoring() {
             const s = it.toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
             const active = s === slug;
             return (
-              <Link key={it} to={`/tailoring/${s}`} className={`text-[11px] tracking-[0.22em] uppercase px-4 py-2 border transition-colors ${active ? 'bg-[hsl(160,30%,12%)] text-[hsl(36,33%,96%)] border-[hsl(160,30%,12%)]' : 'border-[hsl(36,14%,82%)] hover:border-[hsl(160,30%,12%)]'}`}>{it}</Link>
+              <Link key={it} to={`/tailoring/${s}`} className={`text-[11px] tracking-[0.22em] uppercase px-4 py-2 border transition-colors ${active ? 'bg-[hsl(351,33%,18%)] text-[hsl(30,22%,95%)] border-[hsl(351,33%,18%)]' : 'border-[hsl(28,11%,70%)] hover:border-[hsl(351,33%,18%)]'}`}>{it}</Link>
             );
           })}
         </div>
@@ -53,11 +53,11 @@ export default function Tailoring() {
 
       {/* CTA bar */}
       <section className="max-w-[1400px] mx-auto px-6 lg:px-10 mt-20">
-        <div className="bg-[hsl(160,30%,12%)] text-[hsl(36,33%,96%)] p-10 lg:p-14 grid lg:grid-cols-3 gap-8 items-center">
+        <div className="bg-[hsl(351,33%,18%)] text-[hsl(30,22%,95%)] p-10 lg:p-14 grid lg:grid-cols-3 gap-8 items-center">
           <h3 className="font-serif-display text-3xl lg:text-4xl lg:col-span-2">Don't see what you have in mind? <span className="italic">We can craft it.</span></h3>
           <div className="flex flex-wrap gap-3">
-            <Link to="/booking/book-appointment" className="inline-block bg-[hsl(36,33%,96%)] text-[hsl(160,30%,12%)] px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-[hsl(38,38%,58%)] transition-colors">Book Appointment</Link>
-            <Link to="/contact/whatsapp-support" className="inline-block border border-white/40 px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-white hover:text-[hsl(160,30%,12%)] transition-colors">WhatsApp Us</Link>
+            <Link to="/booking/book-appointment" className="inline-block bg-[hsl(30,22%,95%)] text-[hsl(351,33%,18%)] px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-[hsl(28,11%,55%)] transition-colors">Book Appointment</Link>
+            <Link to="/contact/whatsapp-support" className="inline-block border border-white/40 px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-white hover:text-[hsl(351,33%,18%)] transition-colors">WhatsApp Us</Link>
           </div>
         </div>
       </section>

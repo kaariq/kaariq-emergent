@@ -18,27 +18,27 @@ html, body {
 
 @layer base {
   :root {
-    --background: 36 33% 96%;            /* cream/ivory #faf7f2 */
-    --foreground: 160 30% 12%;           /* deep forest */
-    --card: 36 33% 98%;
-    --card-foreground: 160 30% 12%;
-    --popover: 36 33% 98%;
-    --popover-foreground: 160 30% 12%;
-    --primary: 158 28% 22%;              /* emerald deep #2d4f3a */
-    --primary-foreground: 36 33% 97%;
-    --secondary: 36 22% 90%;
-    --secondary-foreground: 160 30% 12%;
-    --muted: 36 18% 88%;
-    --muted-foreground: 160 12% 32%;
-    --accent: 36 22% 90%;
-    --accent-foreground: 160 30% 12%;
+    --background: 30 22% 95%;            /* warm ivory base */
+    --foreground: 351 33% 18%;           /* near-plum text */
+    --card: 30 18% 92%;                  /* light taupe #C4BBAF tint */
+    --card-foreground: 351 33% 18%;
+    --popover: 30 22% 96%;
+    --popover-foreground: 351 33% 18%;
+    --primary: 351 33% 30%;              /* #66333A wine plum */
+    --primary-foreground: 30 22% 96%;
+    --secondary: 30 14% 73%;             /* #C4BBAF */
+    --secondary-foreground: 351 33% 18%;
+    --muted: 28 11% 60%;                 /* #A5978B */
+    --muted-foreground: 351 20% 28%;
+    --accent: 30 14% 73%;
+    --accent-foreground: 351 33% 18%;
     --destructive: 0 70% 45%;
-    --destructive-foreground: 36 33% 97%;
-    --border: 36 14% 82%;
-    --input: 36 14% 82%;
-    --ring: 158 28% 22%;
+    --destructive-foreground: 30 22% 96%;
+    --border: 28 11% 60%;
+    --input: 28 11% 60%;
+    --ring: 351 33% 30%;
     --radius: 0.25rem;
-    --gold: 38 38% 58%;
+    --gold: 28 11% 60%;
   }
   .dark { --background: 160 18% 8%; --foreground: 36 30% 92%; }
 }
