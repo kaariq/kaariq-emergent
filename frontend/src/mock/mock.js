@@ -83,10 +83,17 @@ export const IMAGES = {
 };
 
 export const SERVICES = [
-  { title: "Women's Wear", desc: 'Blouses, Kurtas, Anarkalis, Lehengas, and bottoms — bespoke from sketch to stitch.', img: IMAGES.women, link: '/tailoring/womens-wear' },
-  { title: "Men's Wear", desc: 'Suits, Sherwanis, Kurta-pyjamas and waistcoats — tailored to a flawless silhouette.', img: IMAGES.men, link: '/tailoring/mens-wear' },
-  { title: 'Customizations', desc: 'Hand embroidery, necklines, sleeves, and dyeing — make every piece unmistakably yours.', img: IMAGES.embroidery, link: '/tailoring/customizations' },
-  { title: 'Alterations & Repairs', desc: 'Trusted alterations and restoration for ready-to-wear or beloved heirlooms.', img: IMAGES.fabric, link: '/tailoring/alterations' },
+  { title: "Women's Wear", desc: 'Blouses, Kurtas, Anarkalis, Lehengas, and bottoms — bespoke from sketch to stitch.', img: 'https://images.pexels.com/photos/8432522/pexels-photo-8432522.jpeg', link: '/tailoring/womens-wear' },
+  { title: "Men's Wear", desc: 'Suits, Sherwanis, Kurta-pyjamas and waistcoats — tailored to a flawless silhouette.', img: 'https://images.pexels.com/photos/34211795/pexels-photo-34211795.jpeg', link: '/tailoring/mens-wear' },
+  { title: 'Customizations', desc: 'Hand embroidery, necklines, sleeves, and dyeing — make every piece unmistakably yours.', img: 'https://images.unsplash.com/photo-1771409046893-d5c43a196743', link: '/tailoring/customizations' },
+  { title: 'Alterations & Repairs', desc: 'Trusted alterations and restoration for ready-to-wear or beloved heirlooms.', img: 'https://images.unsplash.com/photo-1687422808289-e721259c9eb4', link: '/tailoring/alterations' },
+];
+
+export const COLLECTIONS = [
+  { tag: 'Wedding Edit', title: 'The Wedding Edit', img: 'https://images.pexels.com/photos/30276951/pexels-photo-30276951.jpeg', blurb: 'Heirloom lehengas and sherwanis for the once-in-a-lifetime moment.' },
+  { tag: 'Festive', title: 'Festive Wear', img: 'https://images.unsplash.com/photo-1724433530860-f094e39b64e7', blurb: 'Diwali, Eid, weddings — dress for the celebration.' },
+  { tag: 'New In', title: 'New Arrivals', img: 'https://images.unsplash.com/photo-1732511405271-003810212501', blurb: 'Fresh silhouettes for the season, just landed in the atelier.' },
+  { tag: 'Daily', title: 'Casual Daily', img: 'https://images.unsplash.com/photo-1732508530231-eda9c8546fdf', blurb: 'Comfort that still turns heads — kurtas, co-ords, modern Indo-western.' },
 ];
 
 export const FEATURES = [
@@ -98,13 +105,6 @@ export const FEATURES = [
   { title: 'Quick Turnaround', desc: 'From sketch to delivery in as little as 14 days.' },
   { title: 'Sustainable Practices', desc: 'Zero-waste cutting, natural dyes and end-of-life take-back.' },
   { title: 'Timeless Fashion', desc: 'Silhouettes that outlast trends — built to be worn for years.' },
-];
-
-export const COLLECTIONS = [
-  { tag: 'Wedding Edit', title: 'The Wedding Edit', img: IMAGES.wedding, blurb: 'Heirloom lehengas and sherwanis for the once-in-a-lifetime moment.' },
-  { tag: 'Festive', title: 'Festive Wear', img: IMAGES.festive, blurb: 'Diwali, Eid, weddings — dress for the celebration.' },
-  { tag: 'New In', title: 'New Arrivals', img: IMAGES.lookbook, blurb: 'Fresh silhouettes for the season, just landed in the atelier.' },
-  { tag: 'Daily', title: 'Casual Daily', img: IMAGES.casual, blurb: 'Comfort that still turns heads — kurtas, co-ords, modern Indo-western.' },
 ];
 
 export const PROCESS = [
@@ -253,10 +253,10 @@ export const TESTIMONIAL_MEDIA = [
 export const TESTIMONIALS = TESTIMONIAL_MEDIA;
 
 export const BLOG = [
-  { title: 'A guide to choosing the right blouse neckline', date: 'Apr 18, 2026', tag: 'Style', img: IMAGES.women },
-  { title: 'Why hand-zardozi is making a comeback', date: 'Apr 02, 2026', tag: 'Craft', img: IMAGES.embroidery },
-  { title: 'How to take measurements at home', date: 'Mar 21, 2026', tag: 'Guide', img: IMAGES.consultation },
-  { title: 'Inside our atelier: the making of a bridal lehenga', date: 'Mar 06, 2026', tag: 'Atelier', img: IMAGES.craft },
+  { title: 'A guide to choosing the right blouse neckline', date: 'Apr 18, 2026', tag: 'Style', img: 'https://images.pexels.com/photos/36435092/pexels-photo-36435092.jpeg' },
+  { title: 'Why hand-zardozi is making a comeback', date: 'Apr 02, 2026', tag: 'Craft', img: 'https://images.unsplash.com/photo-1763400126795-d83e07d3449e' },
+  { title: 'How to take measurements at home', date: 'Mar 21, 2026', tag: 'Guide', img: 'https://images.pexels.com/photos/13206032/pexels-photo-13206032.jpeg' },
+  { title: 'Inside our atelier: the making of a bridal lehenga', date: 'Mar 06, 2026', tag: 'Atelier', img: 'https://images.pexels.com/photos/2723623/pexels-photo-2723623.jpeg' },
 ];
 
 export const GALLERY = [
