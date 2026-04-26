@@ -6,6 +6,15 @@ import { useAuth } from '@/contexts/AuthContext';
 import { DESIGNS, NECKLINES, BACK_DESIGNS, SLEEVE_STYLES, ADDONS, HOW_TO_MEASURE } from '@/data/designs';
 import { MEASUREMENT_FIELDS, CATEGORY_TO_SCHEMA, CATEGORY_LABELS } from '@/data/measurements';
 import { Breadcrumb } from '@/components/PageBits';
+import { NECKLINE_SVGS, BACK_SVGS, SLEEVE_SVGS } from '@/components/DesignSVGs';
+import { Home as HomeIcon, MapPin, UserCheck, PencilLine } from 'lucide-react';
+
+const PLAN_OPTIONS = [
+  { id: 'visit-atelier', label: 'I will visit the atelier', hint: 'A master tailor will record measurements on your visit.', Icon: MapPin },
+  { id: 'home-pickup',   label: 'Send a stylist home',      hint: 'Our team will visit, take measurements & pick up fabric.', Icon: HomeIcon },
+  { id: 'saved-person',  label: 'Use a saved profile',      hint: 'Reuse measurements saved against a person on your account.', Icon: UserCheck },
+  { id: 'enter-now',     label: 'Enter measurements now',   hint: 'I have my measurements ready — I will type them in.', Icon: PencilLine },
+];
 
 const slideX = {
   enter: (d) => ({ x: d > 0 ? 60 : -60, opacity: 0 }),
@@ -24,8 +33,8 @@ export default function OrderJourney() {
 
   const steps = useMemo(() => {
     return isCustom
-      ? ['Upload Design', 'Sleeves', 'Add-ons', 'Measurements', 'Review']
-      : ['Neckline', 'Back', 'Sleeves', 'Add-ons', 'Measurements', 'Review'];
+      ? ['Upload Design', 'Sleeves', 'Add-ons', 'Plan', 'Measurements', 'Review']
+      : ['Neckline', 'Back', 'Sleeves', 'Add-ons', 'Plan', 'Measurements', 'Review'];
   }, [isCustom]);
 
   const [step, setStep] = useState(0);
@@ -37,6 +46,7 @@ export default function OrderJourney() {
     back: 'closed',
     sleeve: 'half',
     addons: [],
+    plan: 'visit-atelier',
     personId: state.people[0]?.id || '',
     measurements: {},
   });
@@ -59,6 +69,7 @@ export default function OrderJourney() {
       customNotes: data.customNotes,
       customizations: { neckline: data.neckline, back: data.back, sleeve: data.sleeve },
       addons: data.addons,
+      plan: data.plan,
       personId: data.personId,
       measurements: data.measurements,
       price: total,
@@ -105,10 +116,11 @@ export default function OrderJourney() {
                 {stepName === 'Upload Design' && (
                   <CustomUploadStep value={data.customPhoto} notes={data.customNotes} onPhoto={(p) => setData({ ...data, customPhoto: p })} onNotes={(v) => setData({ ...data, customNotes: v })}/>
                 )}
-                {stepName === 'Neckline' && <OptionStep title="Choose your neckline" hint="Front opening style. You can refine on call." options={NECKLINES} value={data.neckline} onChange={(v) => setData({ ...data, neckline: v })}/>}
-                {stepName === 'Back' && <OptionStep title="Choose the back" hint="Backless, keyhole, or button — your call." options={BACK_DESIGNS} value={data.back} onChange={(v) => setData({ ...data, back: v })}/>}
-                {stepName === 'Sleeves' && <OptionStep title="Choose sleeve style" hint="Long, short, puff or off-the-shoulder." options={SLEEVE_STYLES} value={data.sleeve} onChange={(v) => setData({ ...data, sleeve: v })}/>}
+                {stepName === 'Neckline' && <OptionStep title="Choose your neckline" hint="Front opening style. You can refine on call." options={NECKLINES} svgMap={NECKLINE_SVGS} value={data.neckline} onChange={(v) => setData({ ...data, neckline: v })}/>}
+                {stepName === 'Back' && <OptionStep title="Choose the back" hint="Backless, keyhole, or button — your call." options={BACK_DESIGNS} svgMap={BACK_SVGS} value={data.back} onChange={(v) => setData({ ...data, back: v })}/>}
+                {stepName === 'Sleeves' && <OptionStep title="Choose sleeve style" hint="Long, short, puff or off-the-shoulder." options={SLEEVE_STYLES} svgMap={SLEEVE_SVGS} value={data.sleeve} onChange={(v) => setData({ ...data, sleeve: v })}/>}
                 {stepName === 'Add-ons' && <AddonsStep value={data.addons} onChange={(v) => setData({ ...data, addons: v })}/>}
+                {stepName === 'Plan' && <PlanStep value={data.plan} onChange={(v) => setData({ ...data, plan: v })} hasSavedPeople={state.people.length > 0}/>}
                 {stepName === 'Measurements' && <MeasurementsStep schemaKey={schemaKey} fields={fields} data={data} setData={setData} state={state} upsertPerson={upsertPerson}/>}
                 {stepName === 'Review' && <ReviewStep data={data} designObj={designObj} isCustom={isCustom} schemaKey={schemaKey} total={total} basePrice={basePrice} addonsPrice={addonsPrice} state={state}/>}
               </motion.div>
@@ -141,6 +153,7 @@ export default function OrderJourney() {
                   {!isCustom && <Row k="Back" v={BACK_DESIGNS.find((n) => n.id === data.back)?.label || '—'}/>}
                   <Row k="Sleeve" v={SLEEVE_STYLES.find((n) => n.id === data.sleeve)?.label || '—'}/>
                   <Row k="Add-ons" v={data.addons.length ? `${data.addons.length} selected` : '—'}/>
+                  <Row k="Plan" v={PLAN_OPTIONS.find((p) => p.id === data.plan)?.label || '—'}/>
                   <Row k="For" v={state.people.find((p) => p.id === data.personId)?.name || '—'}/>
                 </ul>
                 <div className="mt-5 pt-4 border-t border-[hsl(33,11%,80%)] space-y-1.5">
@@ -159,20 +172,68 @@ export default function OrderJourney() {
 
 const Row = ({ k, v }) => <li className="flex justify-between gap-3 text-[hsl(85,13%,32%)]"><span className="text-[11px] tracking-[0.22em] uppercase">{k}</span><span className="text-[hsl(85,13%,19%)] text-right">{v}</span></li>;
 
-function OptionStep({ title, hint, options, value, onChange }) {
+function OptionStep({ title, hint, options, value, onChange, svgMap }) {
   return (
     <div>
       <h2 className="font-serif-display text-3xl text-[hsl(85,13%,19%)]">{title}</h2>
       <p className="text-sm text-[hsl(85,13%,32%)] mt-2">{hint}</p>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6">
-        {options.map((o) => (
-          <motion.button key={o.id} whileHover={{ y: -2 }} onClick={() => onChange(o.id)} className={`text-left p-4 border transition-colors ${value === o.id ? 'bg-[hsl(85,13%,19%)] text-white border-[hsl(85,13%,19%)]' : 'bg-white border-[hsl(33,11%,80%)] hover:border-[hsl(85,13%,19%)]'}`}>
-            <div className="flex items-center justify-between">
-              <span className="font-serif-display text-lg">{o.label}</span>
-              {value === o.id && <Check className="w-4 h-4"/>}
-            </div>
-          </motion.button>
-        ))}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3 mt-6">
+        {options.map((o) => {
+          const selected = value === o.id;
+          const Svg = svgMap?.[o.id];
+          return (
+            <motion.button
+              key={o.id}
+              data-testid={`option-${o.id}`}
+              whileHover={{ y: -2 }}
+              onClick={() => onChange(o.id)}
+              className={`text-left p-4 border transition-colors flex flex-col gap-3 ${selected ? 'bg-[hsl(85,13%,19%)] text-white border-[hsl(85,13%,19%)]' : 'bg-white border-[hsl(33,11%,80%)] hover:border-[hsl(85,13%,19%)] text-[hsl(85,13%,19%)]'}`}
+            >
+              {Svg && (
+                <div className={`aspect-square w-full p-2 ${selected ? 'bg-white/10 text-white' : 'bg-[hsl(33,11%,96%)] text-[hsl(64,30%,36%)]'}`}>
+                  {Svg}
+                </div>
+              )}
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-serif-display text-base sm:text-lg leading-tight">{o.label}</span>
+                {selected && <Check className="w-4 h-4 flex-shrink-0"/>}
+              </div>
+            </motion.button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function PlanStep({ value, onChange, hasSavedPeople }) {
+  const opts = PLAN_OPTIONS.filter((o) => o.id !== 'saved-person' || hasSavedPeople);
+  return (
+    <div>
+      <h2 className="font-serif-display text-3xl text-[hsl(85,13%,19%)]">How shall we measure?</h2>
+      <p className="text-sm text-[hsl(85,13%,32%)] mt-2">Pick what works best — you can change this any time before pickup.</p>
+      <div className="grid sm:grid-cols-2 gap-3 mt-6">
+        {opts.map((o) => {
+          const selected = value === o.id;
+          return (
+            <motion.button
+              key={o.id}
+              data-testid={`plan-${o.id}`}
+              whileHover={{ y: -2 }}
+              onClick={() => onChange(o.id)}
+              className={`text-left p-5 border transition-colors flex items-start gap-4 ${selected ? 'bg-[hsl(85,13%,19%)] text-white border-[hsl(85,13%,19%)]' : 'bg-white border-[hsl(33,11%,80%)] hover:border-[hsl(85,13%,19%)]'}`}
+            >
+              <span className={`mt-0.5 w-9 h-9 flex items-center justify-center flex-shrink-0 ${selected ? 'bg-white/10 text-white' : 'bg-[hsl(33,11%,96%)] text-[hsl(64,30%,36%)]'}`}>
+                <o.Icon className="w-4 h-4"/>
+              </span>
+              <span className="flex-1">
+                <span className="block font-serif-display text-lg leading-tight">{o.label}</span>
+                <span className={`block text-sm mt-1 ${selected ? 'text-white/80' : 'text-[hsl(85,13%,32%)]'}`}>{o.hint}</span>
+              </span>
+              {selected && <Check className="w-4 h-4 flex-shrink-0"/>}
+            </motion.button>
+          );
+        })}
       </div>
     </div>
   );
@@ -239,6 +300,67 @@ function MeasurementsStep({ schemaKey, fields, data, setData, state, upsertPerso
   const useSaved = () => setData({ ...data, measurements: { ...saved } });
   const addPerson = () => { if (!newName) return; const id = `p_${Date.now()}`; upsertPerson({ id, name: newName, relation: 'Self', measurements: {} }); setData({ ...data, personId: id }); setNewName(''); };
 
+  // If user picked "I'll visit" or "send a stylist", show an info panel — measurements
+  // will be captured later. They can still optionally save a name/profile.
+  const deferred = data.plan === 'visit-atelier' || data.plan === 'home-pickup';
+
+  if (deferred) {
+    const planObj = PLAN_OPTIONS.find((p) => p.id === data.plan);
+    return (
+      <div>
+        <h2 className="font-serif-display text-3xl text-[hsl(85,13%,19%)]">Measurements — captured later</h2>
+        <p className="text-sm text-[hsl(85,13%,32%)] mt-2">You chose: <span className="text-[hsl(85,13%,19%)] font-medium">{planObj?.label}</span>. We will capture exact measurements during the appointment.</p>
+
+        <div className="mt-6 p-6 bg-[hsl(33,11%,96%)] border border-[hsl(33,11%,80%)] flex items-start gap-4">
+          <span className="mt-0.5 w-10 h-10 flex items-center justify-center bg-white text-[hsl(64,30%,36%)] flex-shrink-0">
+            {planObj?.Icon ? <planObj.Icon className="w-5 h-5"/> : <Ruler className="w-5 h-5"/>}
+          </span>
+          <div className="flex-1">
+            <div className="font-serif-display text-xl text-[hsl(85,13%,19%)]">{planObj?.label}</div>
+            <p className="text-sm text-[hsl(85,13%,32%)] mt-1">{planObj?.hint}</p>
+            <p className="text-[12px] text-[hsl(85,13%,32%)] mt-3">Once your order is placed, our team will reach out within 24 hours to confirm the slot. You can track this in your profile.</p>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <div className="text-[11px] tracking-[0.22em] uppercase text-[hsl(85,13%,32%)] mb-2">Whose outfit is this?</div>
+          <div className="p-4 bg-white border border-[hsl(33,11%,80%)] flex items-center gap-3 flex-wrap">
+            <select data-testid="person-select" value={data.personId} onChange={(e) => setData({ ...data, personId: e.target.value })} className="bg-white border border-[hsl(33,11%,80%)] py-2 px-3 text-sm">
+              <option value="">— Select a saved person —</option>
+              {state.people.map((p) => <option key={p.id} value={p.id}>{p.name} ({p.relation || 'Self'})</option>)}
+            </select>
+            <span className="text-[11px] text-[hsl(85,13%,32%)]">or</span>
+            <input value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="Add a new person (e.g. ‘Mom’)" className="bg-white border border-[hsl(33,11%,80%)] py-2 px-3 text-sm flex-1 min-w-[200px]"/>
+            <button onClick={addPerson} className="inline-flex items-center gap-1 bg-[hsl(85,13%,19%)] text-white px-3 py-2 text-[11px] tracking-[0.22em] uppercase hover:bg-[hsl(64,30%,36%)]"><Plus className="w-4 h-4"/>Add</button>
+          </div>
+        </div>
+
+        <details className="mt-6 group border border-[hsl(33,11%,80%)] bg-white">
+          <summary className="cursor-pointer list-none px-4 py-3 flex items-center justify-between text-[11px] tracking-[0.22em] uppercase text-[hsl(85,13%,19%)] hover:bg-[hsl(33,11%,96%)]">
+            <span>Have measurements? Enter them now (optional)</span>
+            <Plus className="w-4 h-4 group-open:rotate-45 transition-transform"/>
+          </summary>
+          <div className="border-t border-[hsl(33,11%,80%)] p-4">
+            <div className="grid sm:grid-cols-2 gap-3">
+              {fields.map((f) => (
+                <div key={f.key}>
+                  <div className="flex items-baseline justify-between">
+                    <label className="text-[11px] tracking-[0.18em] uppercase text-[hsl(85,13%,19%)]">{f.en}</label>
+                    <span className="text-[11px] text-[hsl(85,13%,32%)]">{f.hi}</span>
+                  </div>
+                  <div className="flex items-center gap-2 mt-1.5 bg-white border border-[hsl(33,11%,80%)] focus-within:border-[hsl(85,13%,19%)]">
+                    <input value={m[f.key] || ''} onChange={(e) => setVal(f.key, e.target.value)} placeholder={`Enter ${f.en}`} className="flex-1 bg-transparent py-2.5 px-3 text-sm focus:outline-none"/>
+                    <span className="pr-3 text-[11px] tracking-[0.18em] uppercase text-[hsl(85,13%,32%)]">{f.unit}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </details>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="flex items-start justify-between gap-4 flex-wrap">
@@ -252,7 +374,7 @@ function MeasurementsStep({ schemaKey, fields, data, setData, state, upsertPerso
       {/* Person selector */}
       <div className="mt-6 p-4 bg-[hsl(33,11%,96%)] border border-[hsl(33,11%,80%)] flex items-center gap-3 flex-wrap">
         <span className="text-[11px] tracking-[0.22em] uppercase text-[hsl(85,13%,32%)]">Measure for</span>
-        <select value={data.personId} onChange={(e) => setData({ ...data, personId: e.target.value, measurements: {} })} className="bg-white border border-[hsl(33,11%,80%)] py-2 px-3 text-sm">
+        <select data-testid="person-select" value={data.personId} onChange={(e) => setData({ ...data, personId: e.target.value, measurements: {} })} className="bg-white border border-[hsl(33,11%,80%)] py-2 px-3 text-sm">
           <option value="">— Select —</option>
           {state.people.map((p) => <option key={p.id} value={p.id}>{p.name} ({p.relation || 'Self'})</option>)}
         </select>
@@ -343,9 +465,9 @@ function ReviewStep({ data, designObj, isCustom, schemaKey, total, basePrice, ad
           {data.addons.length === 0 && <span className="text-sm text-[hsl(85,13%,32%)]">None</span>}
           <ul className="text-sm space-y-1">{data.addons.map((id) => { const a = ADDONS.find((x) => x.id === id); return <li key={id} className="flex justify-between"><span>{a.label}</span><span>+₹{a.price}</span></li>; })}</ul>
         </Card>
-        <Card title="For">
-          <div className="font-serif-display text-xl">{person?.name || 'Not selected'}</div>
-          <div className="text-[11px] tracking-[0.22em] uppercase text-[hsl(85,13%,32%)] mt-1">{person?.relation}</div>
+        <Card title="Plan & Recipient">
+          <div className="font-serif-display text-xl">{PLAN_OPTIONS.find((p) => p.id === data.plan)?.label || '—'}</div>
+          <div className="text-[11px] tracking-[0.22em] uppercase text-[hsl(85,13%,32%)] mt-1">{person?.name ? `For ${person.name}${person.relation ? ' · ' + person.relation : ''}` : 'No person selected'}</div>
           <div className="text-sm mt-3">{Object.values(data.measurements || {}).filter(Boolean).length} of {(MEASUREMENT_FIELDS[schemaKey] || []).length} measurements filled</div>
         </Card>
       </div>

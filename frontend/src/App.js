@@ -16,6 +16,7 @@ import Profile from './pages/Profile';
 import OrderJourney from './pages/OrderJourney';
 import ScrollToTop from './components/ScrollToTop';
 import PreFooterBooking from './components/PreFooterBooking';
+import AdminApp from './admin/AdminApp';
 import { AuthProvider } from './contexts/AuthContext';
 import { CATEGORY_TO_SCHEMA } from './data/measurements';
 import { Toaster } from './components/ui/sonner';
@@ -27,10 +28,31 @@ function TailoringRouter() {
   return <Tailoring/>;
 }
 
+function isAdminPath(path) { return path.startsWith('/admin'); }
+
 function HideOnAuth({ children }) {
   const loc = useLocation();
-  if (loc.pathname.startsWith('/login') || loc.pathname.startsWith('/profile') || loc.pathname.includes('/order/')) return null;
+  if (
+    loc.pathname.startsWith('/login') ||
+    loc.pathname.startsWith('/profile') ||
+    loc.pathname.includes('/order/') ||
+    isAdminPath(loc.pathname)
+  ) return null;
   return children;
+}
+
+function HideOnAdmin({ children }) {
+  const loc = useLocation();
+  if (isAdminPath(loc.pathname)) return null;
+  return children;
+}
+
+function Chrome() {
+  return <HideOnAdmin><Header /></HideOnAdmin>;
+}
+
+function FooterChrome() {
+  return <HideOnAdmin><Footer /></HideOnAdmin>;
 }
 
 function App() {
@@ -39,7 +61,7 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <ScrollToTop />
-          <Header />
+          <Chrome />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/tailoring" element={<Tailoring />} />
@@ -57,9 +79,10 @@ function App() {
             <Route path="/contact/:slug" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/admin/*" element={<AdminApp />} />
           </Routes>
           <HideOnAuth><PreFooterBooking /></HideOnAuth>
-          <Footer />
+          <FooterChrome />
           <Toaster position="bottom-right" />
         </BrowserRouter>
       </AuthProvider>
