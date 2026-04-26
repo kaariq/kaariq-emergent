@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { ShoppingBag, User, Menu, X, ChevronRight } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ShoppingBag, User, Menu, X, ChevronRight, LogOut } from 'lucide-react';
 import AnnouncementBar from './AnnouncementBar';
 import { NAV, SITE } from '@/mock/mock';
+import { useAuth } from '@/contexts/AuthContext';
 
 const slug = (s) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 const routeFor = (key, item) => `/${key === 'tailoring' ? 'tailoring' : key === 'collections' ? 'collections' : key === 'pricing' ? 'pricing' : key === 'explore' ? 'explore' : key === 'booking' ? 'booking' : 'contact'}/${slug(item)}`;
+const parentRoute = (key) => `/${key === 'booking' ? 'booking' : key}`;
 
 export default function Header() {
   const [open, setOpen] = useState(null);
   const [mobile, setMobile] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [userMenu, setUserMenu] = useState(false);
   const loc = useLocation();
+  const nav = useNavigate();
+  const { isAuthed, user, logout } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -36,7 +41,19 @@ export default function Header() {
             {/* Right icons */}
             <div className="flex items-center gap-4 lg:gap-5 text-[hsl(85,13%,19%)]">
               <Link to="/booking/book-appointment" className="hidden lg:inline-block text-[12px] tracking-[0.18em] uppercase border border-[hsl(85,13%,19%)]/80 px-4 py-2 hover:bg-[hsl(85,13%,19%)] hover:text-[hsl(0,0%,100%)] transition-colors">Book Appointment</Link>
-              <button aria-label="Account" className="hover:opacity-70"><User className="w-[18px] h-[18px]"/></button>
+              <div className="relative">
+                <button onClick={() => isAuthed ? setUserMenu((v) => !v) : nav('/login')} aria-label="Account" className="hover:opacity-70 flex items-center gap-2">
+                  <User className="w-[18px] h-[18px]"/>
+                  {isAuthed && <span className="hidden lg:inline text-[11px] tracking-[0.18em] uppercase">{user.name?.split(' ')[0]}</span>}
+                </button>
+                {userMenu && isAuthed && (
+                  <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-[hsl(33,11%,80%)] shadow-lg z-50">
+                    <Link to="/profile" onClick={() => setUserMenu(false)} className="block px-4 py-3 text-[12px] tracking-[0.18em] uppercase hover:bg-[hsl(33,11%,96%)]">Profile</Link>
+                    <Link to="/profile" onClick={() => setUserMenu(false)} className="block px-4 py-3 text-[12px] tracking-[0.18em] uppercase hover:bg-[hsl(33,11%,96%)]">Orders</Link>
+                    <button onClick={() => { logout(); setUserMenu(false); nav('/'); }} className="w-full text-left px-4 py-3 text-[12px] tracking-[0.18em] uppercase hover:bg-[hsl(33,11%,96%)] flex items-center gap-2 border-t border-[hsl(33,11%,80%)]"><LogOut className="w-3.5 h-3.5"/>Sign out</button>
+                  </div>
+                )}
+              </div>
               <button aria-label="Bag" className="relative hover:opacity-70"><ShoppingBag className="w-[18px] h-[18px]"/><span className="absolute -top-2 -right-2 text-[10px] bg-[hsl(64,30%,36%)] text-[hsl(0,0%,100%)] rounded-full w-4 h-4 flex items-center justify-center">0</span></button>
               <button className="lg:hidden" onClick={() => setMobile(true)} aria-label="Open menu"><Menu className="w-5 h-5"/></button>
             </div>
@@ -44,10 +61,11 @@ export default function Header() {
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center justify-center gap-10 pb-3">
             {NAV.map((n) => (
-              <button key={n.key} onMouseEnter={() => setOpen(n.key)} onClick={() => setOpen(open === n.key ? null : n.key)}
-                className={`text-[12px] tracking-[0.22em] uppercase pb-1 border-b ${open === n.key ? 'border-[hsl(85,13%,19%)]' : 'border-transparent'} hover:border-[hsl(85,13%,19%)] transition-colors`}>
-                {n.label}
-              </button>
+              <div key={n.key} onMouseEnter={() => setOpen(n.key)} className="relative">
+                <Link to={parentRoute(n.key)} className={`text-[12px] tracking-[0.22em] uppercase pb-1 border-b ${open === n.key ? 'border-[hsl(85,13%,19%)]' : 'border-transparent'} hover:border-[hsl(85,13%,19%)] transition-colors`}>
+                  {n.label}
+                </Link>
+              </div>
             ))}
           </nav>
         </div>

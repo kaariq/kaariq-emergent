@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, Phone, ArrowRight, Check, Video, MapPin } from 'lucide-react';
-import { IMAGES } from '@/mock/mock';
+import { useAuth } from '@/contexts/AuthContext';
 
 const TIMES = ['11:00', '12:00', '13:00', '14:30', '15:30', '16:30', '18:00', '19:00'];
 
 export default function PreFooterBooking() {
+  const { addAppointment } = useAuth();
   const days = Array.from({ length: 14 }).map((_, i) => {
     const d = new Date(); d.setDate(d.getDate() + i + 1); return d;
   });
@@ -15,6 +16,12 @@ export default function PreFooterBooking() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [done, setDone] = useState(false);
+
+  const submit = () => {
+    if (!name || !phone) return;
+    addAppointment({ mode, date: days[sel].toISOString(), time, name, phone });
+    setDone(true);
+  };
 
   return (
     <section className="relative bg-white">
@@ -84,7 +91,7 @@ export default function PreFooterBooking() {
                     </div>
                   </div>
 
-                  <button onClick={() => { if (name && phone) setDone(true); }} className="mt-7 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[hsl(85,13%,19%)] text-white px-7 py-3.5 text-[12px] tracking-[0.22em] uppercase hover:bg-[hsl(64,30%,36%)] transition-colors">
+                  <button onClick={submit} className="mt-7 w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[hsl(85,13%,19%)] text-white px-7 py-3.5 text-[12px] tracking-[0.22em] uppercase hover:bg-[hsl(64,30%,36%)] transition-colors">
                     Confirm appointment <ArrowRight className="w-4 h-4"/>
                   </button>
                   <p className="text-[11px] tracking-[0.16em] uppercase text-[hsl(85,13%,32%)] mt-3">We'll WhatsApp you a confirmation within 30 minutes.</p>
