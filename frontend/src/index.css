@@ -18,27 +18,27 @@ html, body {
 
 @layer base {
   :root {
-    --background: 30 22% 95%;            /* warm ivory base */
-    --foreground: 351 33% 18%;           /* near-plum text */
-    --card: 30 18% 92%;                  /* light taupe #C4BBAF tint */
-    --card-foreground: 351 33% 18%;
-    --popover: 30 22% 96%;
-    --popover-foreground: 351 33% 18%;
-    --primary: 351 33% 30%;              /* #66333A wine plum */
-    --primary-foreground: 30 22% 96%;
-    --secondary: 30 14% 73%;             /* #C4BBAF */
-    --secondary-foreground: 351 33% 18%;
-    --muted: 28 11% 60%;                 /* #A5978B */
-    --muted-foreground: 351 20% 28%;
-    --accent: 30 14% 73%;
-    --accent-foreground: 351 33% 18%;
+    --background: 0 0% 100%;             /* pure white */
+    --foreground: 85 13% 19%;            /* #32382b dark olive */
+    --card: 33 11% 96%;
+    --card-foreground: 85 13% 19%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 85 13% 19%;
+    --primary: 85 13% 19%;               /* #32382b */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 33 11% 88%;
+    --secondary-foreground: 85 13% 19%;
+    --muted: 33 11% 73%;                 /* #c3bcb1 */
+    --muted-foreground: 85 13% 32%;
+    --accent: 64 30% 36%;                /* #727941 olive */
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 70% 45%;
-    --destructive-foreground: 30 22% 96%;
-    --border: 28 11% 60%;
-    --input: 28 11% 60%;
-    --ring: 351 33% 30%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 33 11% 80%;
+    --input: 33 11% 80%;
+    --ring: 85 13% 19%;
     --radius: 0.25rem;
-    --gold: 28 11% 60%;
+    --gold: 64 30% 36%;
   }
   .dark { --background: 160 18% 8%; --foreground: 36 30% 92%; }
 }

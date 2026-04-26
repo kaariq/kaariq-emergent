@@ -51,28 +51,17 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1a1a1a] text-white">
-      {/* Newsletter */}
-      <div className="border-b border-white/10">
-        <div className="max-w-[1400px] mx-auto px-6 py-14">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-            <div>
-              <h3 className="font-serif text-2xl mb-2">
-                Stay in the loop
-              </h3>
-              <p className="text-white/60 text-sm">
-                Subscribe for exclusive updates, new collections, and style tips.
-              </p>
-            </div>
-            <div className="flex gap-3 w-full lg:w-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 lg:w-64 px-4 py-3 bg-white/10 border border-white/20 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#A5978B]"
-              />
-              <Button className="px-6 bg-[#66333A] hover:bg-[#66333A]/90 text-white text-sm">
-                Subscribe
-              </Button>
+    <footer className="bg-[hsl(85,13%,19%)] text-[hsl(0,0%,100%)]">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-16 lg:py-24">
+        <div className="grid lg:grid-cols-12 gap-10">
+          <div className="lg:col-span-5">
+            <div className="font-italiana text-3xl tracking-[0.3em]">KAARIQ</div>
+            <p className="font-serif-display text-3xl lg:text-4xl mt-6 leading-tight max-w-md">Your fabric, your fit, your story.</p>
+            <p className="text-sm opacity-75 mt-4 max-w-md">Bespoke tailoring & boutique. Doorstep measurement, virtual fitting, and master craftsmanship — all in one atelier.</p>
+            <div className="flex gap-3 mt-8">
+              <a href="#" aria-label="Instagram" className="w-9 h-9 border border-white/30 hover:bg-white hover:text-[hsl(85,13%,19%)] flex items-center justify-center transition-colors"><Instagram className="w-4 h-4"/></a>
+              <a href="#" aria-label="Facebook" className="w-9 h-9 border border-white/30 hover:bg-white hover:text-[hsl(85,13%,19%)] flex items-center justify-center transition-colors"><Facebook className="w-4 h-4"/></a>
+              <a href="#" aria-label="Youtube" className="w-9 h-9 border border-white/30 hover:bg-white hover:text-[hsl(85,13%,19%)] flex items-center justify-center transition-colors"><Youtube className="w-4 h-4"/></a>
             </div>
           </div>
         </div>
