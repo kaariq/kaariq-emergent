@@ -1,65 +1,165 @@
-import React, { useState } from 'react';
+"use client"
+
 import { Link } from 'react-router-dom';
-import { Instagram, Facebook, Youtube, Send } from 'lucide-react';
-import { SITE } from '@/mock/mock';
+import { Instagram, Twitter, Youtube, Mail, Phone, MapPin } from "lucide-react"
+import { Button } from "@/components/ui/button"
+
+const footerLinks = {
+  tailoring: {
+    title: "Tailoring",
+    links: [
+      { label: "Women's Wear", href: "#" },
+      { label: "Men's Wear", href: "#" },
+      { label: "Customizations", href: "#" },
+      { label: "Alterations", href: "#" }
+    ]
+  },
+  collections: {
+    title: "Collections",
+    links: [
+      { label: "Wedding Edit", href: "#" },
+      { label: "Festive Wear", href: "#" },
+      { label: "Formal Business", href: "#" },
+      { label: "New Arrivals", href: "#" }
+    ]
+  },
+  company: {
+    title: "Company",
+    links: [
+      { label: "About Us", href: "#" },
+      { label: "Our Process", href: "#" },
+      { label: "Careers", href: "#" },
+      { label: "Press", href: "#" }
+    ]
+  },
+  support: {
+    title: "Support",
+    links: [
+      { label: "Contact Us", href: "#" },
+      { label: "FAQs", href: "#" },
+      { label: "Shipping", href: "#" },
+      { label: "Returns", href: "#" }
+    ]
+  }
+}
+
+const socialLinks = [
+  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Youtube, href: "#", label: "YouTube" }
+]
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
-  const [done, setDone] = useState(false);
   return (
-    <footer className="bg-[hsl(351,33%,18%)] text-[hsl(30,22%,95%)] mt-24">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-5">
-            <div className="font-italiana text-3xl tracking-[0.3em]">KAARIQ</div>
-            <p className="font-serif-display text-3xl lg:text-4xl mt-6 leading-tight max-w-md">Your fabric, your fit, your story.</p>
-            <p className="text-sm opacity-75 mt-4 max-w-md">Bespoke tailoring & boutique. Doorstep measurement, virtual fitting, and master craftsmanship — all in one atelier.</p>
-            <div className="flex gap-3 mt-8">
-              <a href="#" aria-label="Instagram" className="w-9 h-9 border border-white/30 hover:bg-white hover:text-[hsl(351,33%,18%)] flex items-center justify-center transition-colors"><Instagram className="w-4 h-4"/></a>
-              <a href="#" aria-label="Facebook" className="w-9 h-9 border border-white/30 hover:bg-white hover:text-[hsl(351,33%,18%)] flex items-center justify-center transition-colors"><Facebook className="w-4 h-4"/></a>
-              <a href="#" aria-label="Youtube" className="w-9 h-9 border border-white/30 hover:bg-white hover:text-[hsl(351,33%,18%)] flex items-center justify-center transition-colors"><Youtube className="w-4 h-4"/></a>
+    <footer className="bg-[#1a1a1a] text-white">
+      {/* Newsletter */}
+      <div className="border-b border-white/10">
+        <div className="max-w-[1400px] mx-auto px-6 py-14">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+            <div>
+              <h3 className="font-serif text-2xl mb-2">
+                Stay in the loop
+              </h3>
+              <p className="text-white/60 text-sm">
+                Subscribe for exclusive updates, new collections, and style tips.
+              </p>
             </div>
-          </div>
-          <div className="lg:col-span-2">
-            <div className="text-[11px] tracking-[0.22em] uppercase opacity-60 mb-4">Tailoring</div>
-            <ul className="space-y-2 text-sm">
-              <li><Link to="/tailoring/blouse" className="hover:underline">Women's Wear</Link></li>
-              <li><Link to="/tailoring/sherwani" className="hover:underline">Men's Wear</Link></li>
-              <li><Link to="/tailoring/embroidery-and-work" className="hover:underline">Customizations</Link></li>
-              <li><Link to="/tailoring/alterations-and-repairs" className="hover:underline">Alterations</Link></li>
-            </ul>
-          </div>
-          <div className="lg:col-span-2">
-            <div className="text-[11px] tracking-[0.22em] uppercase opacity-60 mb-4">Discover</div>
-            <ul className="space-y-2 text-sm">
-              <li><Link to="/collections/wedding-edit" className="hover:underline">Wedding Edit</Link></li>
-              <li><Link to="/explore/gallery-and-lookbook" className="hover:underline">Gallery</Link></li>
-              <li><Link to="/explore/blog-and-fashion-news" className="hover:underline">Journal</Link></li>
-              <li><Link to="/booking/measurement-guide" className="hover:underline">Measurement Guide</Link></li>
-            </ul>
-          </div>
-          <div className="lg:col-span-3">
-            <div className="text-[11px] tracking-[0.22em] uppercase opacity-60 mb-4">Atelier Hours</div>
-            <p className="text-sm opacity-90">{SITE.hours}</p>
-            <div className="text-[11px] tracking-[0.22em] uppercase opacity-60 mt-6 mb-4">Visit Us</div>
-            <p className="text-sm opacity-90 leading-relaxed">{SITE.address}</p>
-            <div className="text-[11px] tracking-[0.22em] uppercase opacity-60 mt-6 mb-4">Stay In Touch</div>
-            <form onSubmit={(e)=>{e.preventDefault(); if(email){setDone(true); setEmail(''); setTimeout(()=>setDone(false),3000);}}} className="flex border-b border-white/40">
-              <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" required placeholder="Your email" className="flex-1 bg-transparent py-2 text-sm placeholder:opacity-60 focus:outline-none"/>
-              <button type="submit" aria-label="Subscribe" className="px-2 hover:opacity-70"><Send className="w-4 h-4"/></button>
-            </form>
-            {done && <div className="text-[11px] mt-2 opacity-80">Thank you — we'll be in touch.</div>}
-          </div>
-        </div>
-        <div className="border-t border-white/15 mt-14 pt-6 flex flex-col lg:flex-row gap-3 justify-between text-[11px] tracking-[0.18em] uppercase opacity-70">
-          <span>© {new Date().getFullYear()} Kaariq Atelier · All rights reserved</span>
-          <div className="flex gap-6">
-            <Link to="/contact/find-our-studio" className="hover:opacity-100">Privacy</Link>
-            <Link to="/contact/find-our-studio" className="hover:opacity-100">Terms</Link>
-            <Link to="/contact/find-our-studio" className="hover:opacity-100">Shipping</Link>
+            <div className="flex gap-3 w-full lg:w-auto">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 lg:w-64 px-4 py-3 bg-white/10 border border-white/20 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#A5978B]"
+              />
+              <Button className="px-6 bg-[#66333A] hover:bg-[#66333A]/90 text-white text-sm">
+                Subscribe
+              </Button>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Main Footer */}
+      <div className="max-w-[1400px] mx-auto px-6 py-14">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-10">
+          {/* Brand */}
+          <div className="col-span-2 md:col-span-3 lg:col-span-2">
+            <Link href="/" className="inline-block mb-5">
+              <span className="font-serif text-2xl font-semibold">Kaariq</span>
+            </Link>
+            <p className="text-white/60 text-sm mb-5 max-w-sm leading-relaxed">
+              Crafting elegance since 2015. Bespoke tailoring and boutique services
+              that celebrate your unique style.
+            </p>
+            <div className="flex gap-3">
+              {socialLinks.map((social) => (
+                <Link
+                  key={social.label}
+                  href={social.href}
+                  className="w-9 h-9 border border-white/20 flex items-center justify-center hover:border-[#A5978B] hover:text-[#A5978B] transition-colors"
+                  aria-label={social.label}
+                >
+                  <social.icon className="w-4 h-4" />
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Links */}
+          {Object.entries(footerLinks).map(([key, section]) => (
+            <div key={key}>
+              <h4 className="text-sm font-medium mb-4">{section.title}</h4>
+              <ul className="space-y-2">
+                {section.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-xs text-white/60 hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Contact Info */}
+        <div className="mt-14 pt-6 border-t border-white/10">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+            <div className="flex flex-wrap gap-5 text-xs text-white/60">
+              <div className="flex items-center gap-2">
+                <Mail className="w-3 h-3" />
+                <span>hello@kaariq.com</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone className="w-3 h-3" />
+                <span>+91 98765 43210</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="w-3 h-3" />
+                <span>Mumbai, India</span>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-5 text-xs text-white/60">
+              <Link href="#" className="hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="#" className="hover:text-white transition-colors">
+                Terms of Service
+              </Link>
+              <Link href="#" className="hover:text-white transition-colors">
+                Cookie Policy
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="mt-6 text-center text-xs text-white/40">
+          <p>&copy; {new Date().getFullYear()} Kaariq. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
-  );
+  )
 }

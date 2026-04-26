@@ -12,6 +12,7 @@ import BookingGuide from './pages/BookingGuide';
 import Contact from './pages/Contact';
 import ScrollToTop from './components/ScrollToTop';
 import { Toaster } from './components/ui/sonner';
+// import  BookingSection from './components/booking-section';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/contact/:slug" element={<Contact />} />
         </Routes>
+        {/* <BookingSection /> */}
         <Footer />
         <Toaster position="bottom-right" />
       </BrowserRouter>

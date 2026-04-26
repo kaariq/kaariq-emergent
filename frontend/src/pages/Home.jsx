@@ -124,30 +124,105 @@ function ServicesGrid() {
   );
 }
 
+"use client"
+
+import { motion } from "framer-motion"
+
+const steps = [
+  {
+    number: "01",
+    title: "Consultation & Discovery",
+    description:
+      "We begin by understanding your vision, preferences, and requirements. Share your ideas, and our experts will guide you through fabric choices and design possibilities."
+  },
+  {
+    number: "02",
+    title: "Design & Measurement",
+    description:
+      "Our skilled designers create detailed sketches while our tailors take precise measurements. Every detail is captured to ensure the perfect fit."
+  },
+  {
+    number: "03",
+    title: "Crafting & Creation",
+    description:
+      "Watch your vision come to life as our master craftsmen meticulously cut, stitch, and assemble your garment with care and precision."
+  },
+  {
+    number: "04",
+    title: "Fitting & Perfection",
+    description:
+      "Try on your creation for final adjustments. We ensure every seam, hem, and detail meets our exacting standards before delivery."
+  }
+]
+
 function ProcessSection() {
   return (
-    <section className="bg-[hsl(351,33%,18%)] text-[hsl(30,22%,95%)]">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-20 lg:py-28">
-        <div className="grid lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-4">
-            <div className="edit-num opacity-70">—  THE KAARIQ PROCESS</div>
-            <h2 className="font-serif-display text-4xl lg:text-5xl mt-3 leading-[1.05]">From sketch <span className="italic">to silhouette,</span> in six steps.</h2>
-            <p className="text-sm opacity-75 mt-5 max-w-sm leading-relaxed">A considered, calm process — designed to put you at the centre of every decision. Whether you visit our atelier, host us at home, or fit virtually, the experience is the same.</p>
-            <Link to="/booking/our-process" className="inline-flex items-center gap-2 mt-8 border border-white/40 px-6 py-3 text-[12px] tracking-[0.22em] uppercase hover:bg-white hover:text-[hsl(351,33%,18%)] transition-colors">Read full process <ArrowRight className="w-4 h-4"/></Link>
-          </div>
-          <div className="lg:col-span-8 grid sm:grid-cols-2 gap-px bg-white/10">
-            {PROCESS.map((p) => (
-              <div key={p.n} className="p-8 bg-[hsl(351,33%,18%)] hover:bg-[hsl(351,40%,24%)] transition-colors">
-                <div className="font-italiana text-3xl text-[hsl(28,11%,55%)]">{p.n}</div>
-                <h3 className="font-serif-display text-2xl mt-2">{p.title}</h3>
-                <p className="text-sm opacity-75 mt-3 leading-relaxed">{p.desc}</p>
-              </div>
-            ))}
+    <section className="py-20 lg:py-28 bg-[#f8f7f5]">
+      <div className="max-w-[1400px] mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+          {/* Left Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="lg:sticky lg:top-32 lg:self-start"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-2 h-2 bg-[#66333A]" />
+              <span className="text-xs tracking-widest uppercase text-muted-foreground">Process</span>
+            </div>
+            <h2 className="font-serif text-3xl sm:text-4xl leading-tight text-foreground">
+              Proven & effective process.{" "}
+              <span className="text-[#A5978B]">That delivers results.</span>
+            </h2>
+            <p className="mt-5 text-sm text-muted-foreground leading-relaxed">
+              We dive deep into your style, preferences, and occasion to craft a
+              garment that drives confidence and makes a statement.
+            </p>
+          </motion.div>
+
+          {/* Right Timeline */}
+          <div className="relative">
+            {/* Vertical line */}
+            <div className="absolute left-[19px] top-0 bottom-0 w-px bg-[#C4BBAF] lg:left-[23px]" />
+
+            <div className="space-y-6">
+              {steps.map((step, index) => (
+                <motion.div
+                  key={step.number}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                  className="relative flex gap-5 lg:gap-6"
+                >
+                  {/* Number */}
+                  <div className="relative z-10 flex-shrink-0">
+                    <div className="w-10 h-10 lg:w-12 lg:h-12 bg-white border border-[#C4BBAF] flex items-center justify-center">
+                      <span className="text-xs lg:text-sm font-medium text-[#66333A]">
+                        {step.number}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1 bg-white p-5 border border-[#e5e2de]">
+                    <h3 className="text-base font-medium text-foreground mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
     </section>
-  );
+  )
 }
 
 function CollectionsEditorial() {
